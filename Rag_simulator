@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Interactive RAG Simulator</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,Segoe UI,sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(135deg,#0f172a,#111827,#1e293b);
+
+color:white;
+min-height:100vh;
+padding:40px;
+}
+
+h1{
+text-align:center;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+opacity:.75;
+margin-bottom:35px;
+}
+
+.wrapper{
+display:grid;
+grid-template-columns:350px 1fr;
+gap:30px;
+}
+
+.panel{
+
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(16px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:18px;
+padding:25px;
+}
+
+textarea{
+width:100%;
+height:120px;
+resize:none;
+padding:15px;
+border:none;
+border-radius:12px;
+font-size:15px;
+background:#0f172a;
+color:white;
+outline:none;
+}
+
+button{
+margin-top:20px;
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+background:linear-gradient(90deg,#4f46e5,#7c3aed);
+color:white;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+.pipeline{
+
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.step{
+
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.07);
+border-radius:16px;
+padding:18px;
+transition:.4s;
+opacity:.45;
+position:relative;
+overflow:hidden;
+}
+
+.step.active{
+opacity:1;
+border-color:#60a5fa;
+transform:scale(1.02);
+box-shadow:0 0 30px rgba(96,165,250,.25);
+}
+
+.step h3{
+margin-bottom:8px;
+font-size:18px;
+}
+
+.output{
+
+margin-top:12px;
+background:#0f172a;
+padding:12px;
+border-radius:10px;
+font-size:14px;
+min-height:40px;
+white-space:pre-wrap;
+line-height:1.5;
+}
+
+.arrow{
+text-align:center;
+font-size:30px;
+opacity:.4;
+}
+
+.badge{
+display:inline-block;
+padding:5px 10px;
+background:#2563eb;
+border-radius:50px;
+font-size:12px;
+margin-bottom:10px;
+}
+
+.chunk{
+background:#1d4ed8;
+padding:8px 12px;
+border-radius:10px;
+margin-top:8px;
+font-size:13px;
+animation:fade .5s ease;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.final{
+
+font-size:15px;
+line-height:1.8;
+}
+
+.flow{
+
+position:absolute;
+left:-100%;
+top:0;
+height:100%;
+width:100%;
+background:
+linear-gradient(90deg,
+transparent,
+rgba(255,255,255,.12),
+transparent);
+
+animation:flow 1s linear infinite;
+}
+
+@keyframes flow{
+
+to{
+left:100%;
+}
+
+}
+
+small{
+opacity:.7;
+}
+
+</style>
+</head>
+<body>
+
+<h1>RAG Simulator</h1>
+
+<div class="subtitle">
+High-Level Visualization of Retrieval-Augmented Generation
+</div>
+
+<div class="wrapper">
+
+<div class="panel">
+
+<h2>Ask Something</h2>
+
+<br>
+
+<textarea id="query">
+How do I improve my Amazon product listing?
+</textarea>
+
+<button onclick="runRAG()">
+Run RAG
+</button>
+
+</div>
+
+<div class="pipeline">
+
+<div class="step" id="step1">
+
+<div class="badge">
+1. User Query
+</div>
+
+<h3>User asks a question</h3>
+
+<div class="output" id="q"></div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step" id="step2">
+
+<div class="badge">
+2. Embedding
+</div>
+
+<h3>Convert query into meaning</h3>
+
+<div class="output" id="embed"></div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step" id="step3">
+
+<div class="badge">
+3. Vector Search
+</div>
+
+<h3>Search similar knowledge</h3>
+
+<div class="output" id="search"></div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step" id="step4">
+
+<div class="badge">
+4. Retrieved Chunks
+</div>
+
+<h3>Relevant information found</h3>
+
+<div class="output" id="chunks"></div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step" id="step5">
+
+<div class="badge">
+5. Prompt Augmentation
+</div>
+
+<h3>Combine question + retrieved knowledge</h3>
+
+<div class="output" id="prompt"></div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step" id="step6">
+
+<div class="badge">
+6. LLM Generation
+</div>
+
+<h3>Generate answer</h3>
+
+<div class="output" id="llm"></div>
+
+</div>
+
+<div class="arrow">↓</div>
+
+<div class="step" id="step7">
+
+<div class="badge">
+7. Final Response
+</div>
+
+<h3>Answer returned to user</h3>
+
+<div class="output final" id="answer"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const chunks=[
+"Amazon favors listings with relevant keywords in the title and bullet points.",
+"High-quality images increase conversion rates significantly.",
+"Backend search terms help products appear in additional searches.",
+"Customer reviews improve ranking and trust.",
+"A+ Content increases engagement and conversion."
+];
+
+function sleep(ms){
+return new Promise(r=>setTimeout(r,ms));
+}
+
+async function activate(id){
+
+document.querySelectorAll(".step").forEach(s=>{
+s.classList.remove("active");
+
+const f=s.querySelector(".flow");
+if(f)f.remove();
+
+});
+
+const el=document.getElementById(id);
+el.classList.add("active");
+
+const flow=document.createElement("div");
+flow.className="flow";
+el.appendChild(flow);
+
+await sleep(900);
+
+flow.remove();
+
+}
+
+async function runRAG(){
+
+document.querySelectorAll(".output").forEach(x=>x.innerHTML="");
+
+const q=document.getElementById("query").value;
+
+await activate("step1");
+
+document.getElementById("q").innerHTML=q;
+
+await activate("step2");
+
+document.getElementById("embed").innerHTML=
+`
+Instead of matching exact words,
+the query is converted into a numerical representation
+that captures its semantic meaning.
+`;
+
+await activate("step3");
+
+document.getElementById("search").innerHTML=
+`
+Searching Vector Database...
+
+Finding documents with similar meaning...
+`;
+
+await activate("step4");
+
+const container=document.getElementById("chunks");
+
+for(let c of chunks){
+
+const div=document.createElement("div");
+div.className="chunk";
+div.innerHTML=c;
+container.appendChild(div);
+
+await sleep(500);
+
+}
+
+await activate("step5");
+
+document.getElementById("prompt").innerHTML=
+`
+Prompt sent to the LLM:
+
+Question:
+"${q}"
+
++
+
+Retrieved Context:
+• ${chunks[0]}
+• ${chunks[1]}
+• ${chunks[2]}
+• ${chunks[3]}
+`;
+
+await activate("step6");
+
+document.getElementById("llm").innerHTML=
+`
+The LLM reads BOTH the user's question
+and the retrieved context before generating
+an informed answer.
+`;
+
+await activate("step7");
+
+document.getElementById("answer").innerHTML=
+`
+To improve your Amazon listing:
+
+• Use strong keywords in your title.
+• Write informative bullet points.
+• Upload high-quality product images.
+• Add A+ Content.
+• Encourage customer reviews.
+• Use backend search terms.
+
+Without Retrieval, the model would rely only on its training.
+With RAG, it first retrieves relevant knowledge, making answers more accurate and grounded.
+`;
+
+}
+
+</script>
+
+</body>
+</html>
