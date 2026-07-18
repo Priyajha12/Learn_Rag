@@ -8,166 +8,357 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
+
     font-family:'Inter',sans-serif;
-    background:#f4f7fb;
-    color:#2d3748;
-    line-height:1.6;
+    background:#f5f7fb;
+    color:#1e293b;
 }
 
-.resume{
-    max-width:1100px;
-    margin:40px auto;
-    background:#fff;
-    display:grid;
-    grid-template-columns:300px 1fr;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 20px 50px rgba(0,0,0,.08);
+.container{
+
+    max-width:1200px;
+    margin:auto;
+    padding:60px 60px;
 }
 
-.sidebar{
-    background:#0f172a;
-    color:#fff;
-    padding:40px 30px;
+/* ---------------- HERO ---------------- */
+
+.hero{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:90px;
 }
 
-.sidebar h3{
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    margin-bottom:18px;
-    color:#94a3b8;
-}
+.hero h1{
 
-.sidebar section{
-    margin-bottom:35px;
-}
-
-.sidebar p,
-.sidebar li{
-    font-size:14px;
-    color:#d7dde8;
-}
-
-.sidebar ul{
-    list-style:none;
-}
-
-.sidebar li{
-    margin-bottom:10px;
-}
-
-.main{
-    padding:40px 45px;
-}
-
-.header{
-    margin-bottom:30px;
-}
-
-.header h1{
-    font-size:42px;
+    font-size:62px;
     font-weight:800;
     color:#0f172a;
 }
 
-.header h2{
-    margin-top:6px;
-    font-size:20px;
+.hero h2{
+
+    margin-top:12px;
     color:#2563eb;
+    font-weight:600;
+    font-size:28px;
+}
+
+.hero p{
+
+    margin-top:25px;
+    color:#64748b;
+    width:550px;
+    line-height:1.8;
+}
+
+.stats{
+
+    display:grid;
+    grid-template-columns:repeat(2,170px);
+    gap:20px;
+}
+
+.card{
+
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    text-align:center;
+    box-shadow:0 10px 35px rgba(0,0,0,.05);
+}
+
+.card h3{
+
+    font-size:34px;
+    color:#2563eb;
+}
+
+.card span{
+
+    color:#64748b;
+    font-size:14px;
+}
+
+/* ---------------- SECTION ---------------- */
+
+.section{
+
+    margin-top:90px;
+}
+
+.title{
+
+    font-size:36px;
+    font-weight:800;
+    margin-bottom:50px;
+}
+
+/* ---------------- TIMELINE ---------------- */
+
+.timeline{
+
+    position:relative;
+    padding-left:70px;
+}
+
+.timeline:before{
+
+    content:"";
+    position:absolute;
+    left:22px;
+    top:0;
+    width:4px;
+    height:100%;
+    background:#dbeafe;
+}
+
+.item{
+
+    position:relative;
+    margin-bottom:60px;
+}
+
+.item:before{
+
+    content:"";
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#2563eb;
+    position:absolute;
+    left:-57px;
+    top:8px;
+}
+
+.year{
+
+    font-size:15px;
+    color:#64748b;
     font-weight:600;
 }
 
-.location{
+.role{
+
+    font-size:28px;
+    font-weight:700;
     margin-top:8px;
-    color:#64748b;
-    font-size:15px;
-}
-
-.summary{
-    margin-top:28px;
-}
-
-.summary p{
-    color:#475569;
-}
-
-.section{
-    margin-top:34px;
-}
-
-.section-title{
-    font-size:18px;
-    font-weight:700;
-    color:#0f172a;
-    margin-bottom:18px;
-    border-left:4px solid #2563eb;
-    padding-left:12px;
-}
-
-.job{
-    margin-bottom:28px;
-}
-
-.job-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-}
-
-.job-title{
-    font-size:17px;
-    font-weight:700;
 }
 
 .company{
+
     color:#2563eb;
+    font-weight:600;
+    margin-top:5px;
+}
+
+.subtitle{
+
+    margin-top:15px;
+    font-size:20px;
+    color:#0f172a;
     font-weight:600;
 }
 
-.duration{
-    font-size:14px;
-    color:#64748b;
-}
+.item ul{
 
-.job ul{
-    margin-top:10px;
-    padding-left:18px;
-}
-
-.job li{
-    margin-bottom:8px;
+    margin-top:18px;
+    padding-left:20px;
     color:#475569;
 }
 
-.education{
-    margin-bottom:18px;
+.item li{
+
+    margin-bottom:10px;
+    line-height:1.7;
 }
 
-.education strong{
-    display:block;
+/* ---------------- EVOLUTION ---------------- */
+
+.evolution{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+.step{
+
+background:white;
+padding:30px;
+flex:1;
+text-align:center;
+border-radius:16px;
+box-shadow:0 8px 30px rgba(0,0,0,.05);
+font-weight:600;
+
+}
+
+.arrow{
+
+font-size:30px;
+color:#94a3b8;
+
+}
+
+/* ---------------- IMPACT ---------------- */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+
+}
+
+.impact{
+
+background:white;
+padding:35px;
+border-radius:18px;
+box-shadow:0 8px 30px rgba(0,0,0,.05);
+text-align:center;
+
+}
+
+.impact h2{
+
+font-size:48px;
+color:#2563eb;
+margin-bottom:10px;
+
+}
+
+.impact p{
+
+color:#64748b;
+
+}
+
+/* ---------------- SKILLS ---------------- */
+
+.skills{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+
+}
+
+.skill{
+
+background:white;
+padding:25px;
+border-radius:16px;
+box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+}
+
+.skill h3{
+
+margin-bottom:15px;
+color:#2563eb;
+
+}
+
+.skill li{
+
+margin-bottom:8px;
+color:#475569;
+
+}
+
+/* ---------------- PROJECTS ---------------- */
+
+.projects{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+
+}
+
+.project{
+
+background:white;
+padding:35px;
+border-radius:18px;
+box-shadow:0 10px 35px rgba(0,0,0,.05);
+
+}
+
+.project h3{
+
+font-size:24px;
+margin-bottom:15px;
+
+}
+
+.badge{
+
+display:inline-block;
+padding:8px 14px;
+background:#dbeafe;
+color:#2563eb;
+border-radius:50px;
+margin:8px 8px 0 0;
+font-size:14px;
+
+}
+
+footer{
+
+margin:100px 0 20px;
+text-align:center;
+color:#64748b;
+font-size:18px;
+
 }
 
 @media(max-width:900px){
 
-.resume{
+.hero{
+
+flex-direction:column;
+gap:50px;
+
+}
+
+.hero p{
+
+width:100%;
+
+}
+
+.grid,
+.skills,
+.projects{
+
 grid-template-columns:1fr;
+
 }
 
-.sidebar{
-order:2;
-}
+.stats{
 
-.main{
-order:1;
+grid-template-columns:repeat(2,1fr);
+
 }
 
 }
@@ -178,211 +369,363 @@ order:1;
 
 <body>
 
-<div class="resume">
+<div class="container">
 
-<div class="sidebar">
+<section class="hero">
 
-<section>
-<h3>Contact</h3>
-<p>priyajha2803@gmail.com</p>
-<p>www.linkedin.com/in/priya-apvin</p>
-</section>
-
-<section>
-<h3>Top Skills</h3>
-
-<ul>
-<li>Artificial Intelligence (AI)</li>
-<li>GitHub</li>
-<li>Vibe Coding</li>
-</ul>
-
-</section>
-
-<section>
-<h3>Languages</h3>
-
-<ul>
-<li>English</li>
-<li>Hindi</li>
-</ul>
-
-</section>
-
-<section>
-
-<h3>Certifications</h3>
-
-<ul>
-<li>Becoming an AI-First Product Leader</li>
-<li>Product Management Insights</li>
-<li>Product Management Tips</li>
-<li>Technical Product Management</li>
-<li>Aha! Product Management Professional Certificate</li>
-</ul>
-
-</section>
-
-</div>
-
-<div class="main">
-
-<div class="header">
+<div>
 
 <h1>Priya Jha</h1>
 
-<h2>Technical Product Manager | AI Product Manager | B2B SaaS</h2>
-
-<div class="location">
-Greater Bengaluru Area
-</div>
-
-</div>
-
-<div class="summary">
-
-<div class="section-title">Professional Summary</div>
+<h2>Technical Product Manager • AI Product Builder</h2>
 
 <p>
-Product Manager with 5+ years of experience building and scaling B2B SaaS products across e-commerce, relocation, and workflow-driven platforms. Strong ownership mindset with experience across product strategy, analytics, execution, documentation, and cross-functional collaboration. Passionate about data-driven and AI-enabled products that improve customer experience and accelerate product development.
+
+Building AI-first SaaS products by combining engineering, product strategy,
+analytics, and rapid execution. My career has evolved from writing code to
+building products that solve meaningful customer problems at scale.
+
 </p>
 
 </div>
 
-<div class="section">
+<div class="stats">
 
-<div class="section-title">Professional Experience</div>
-
-<div class="job">
-
-<div class="job-header">
-
-<div>
-
-<div class="job-title">Technical Product Manager</div>
-
-<div class="company">eComSuite</div>
-
+<div class="card">
+<h3>5+</h3>
+<span>Years Experience</span>
 </div>
 
-<div class="duration">
-Jan 2025 – Present
+<div class="card">
+<h3>300+</h3>
+<span>User Interviews</span>
 </div>
 
+<div class="card">
+<h3>80%</h3>
+<span>Automation</span>
 </div>
 
-<ul>
-<li>Conduct market research, competitor analysis, and beta customer interviews.</li>
-<li>Collaborate with founders and engineering teams to define MVPs aligned with business goals.</li>
-<li>Create product roadmaps, specifications, onboarding documentation, and tutorials.</li>
-<li>Use BigQuery and Google Analytics to monitor product metrics and guide decisions.</li>
-<li>Continuously prioritize backlog items to deliver functional MVPs efficiently.</li>
-</ul>
-
-</div>
-
-<div class="job">
-
-<div class="job-header">
-
-<div>
-
-<div class="job-title">Associate Product Manager</div>
-
-<div class="company">Jobbatical</div>
-
-</div>
-
-<div class="duration">
-Sep 2022 – Mar 2024
+<div class="card">
+<h3>70%</h3>
+<span>User Engagement</span>
 </div>
 
 </div>
 
-<ul>
-<li>Led automation of European government workflows, reducing internal effort by 80%.</li>
-<li>Collaborated on AI chatbot enhancements, reducing manual intervention by 40%.</li>
-<li>Worked on Bank Wallet feature contributing to 20% client acquisition growth.</li>
-<li>Created roadmaps, specifications, and knowledge base documentation.</li>
-<li>Used Metabase, BigQuery, and LogRocket for product analytics.</li>
-<li>Interviewed more than 120 customers to validate product direction.</li>
-</ul>
+</section>
 
-</div>
+<section class="section">
 
-<div class="job">
+<h2 class="title">Career Journey</h2>
 
-<div class="job-header">
+<div class="timeline">
 
-<div>
+<div class="item">
 
-<div class="job-title">Associate Product Manager</div>
+<div class="year">2020</div>
 
-<div class="company">Apvin Labs Pvt Ltd</div>
-
-</div>
-
-<div class="duration">
-Dec 2020 – Sep 2022
-</div>
-
-</div>
-
-<ul>
-<li>Planned MVP architecture and end-to-end product roadmaps.</li>
-<li>Prepared product specifications and internal documentation.</li>
-<li>Worked closely with cross-functional teams throughout delivery.</li>
-<li>Managed execution plans, scope, and resource allocation.</li>
-<li>Contributed to a 10% increase in user engagement.</li>
-</ul>
-
-</div>
-
-<div class="job">
-
-<div class="job-header">
-
-<div>
-
-<div class="job-title">Software Engineer</div>
+<div class="role">Software Engineer</div>
 
 <div class="company">Tata Consultancy Services</div>
 
-</div>
-
-<div class="duration">
-Sep 2020 – Mar 2022
-</div>
-
-</div>
+<div class="subtitle">Learning Engineering Fundamentals</div>
 
 <ul>
-<li>Worked on Salesforce Enterprise Service Cloud projects.</li>
-<li>Developed Apex components from scratch and deployed to production.</li>
-<li>Delivered over 50 features while collaborating with distributed teams.</li>
+
+<li>Built 50+ Salesforce components.</li>
+
+<li>Worked in Agile enterprise teams.</li>
+
+<li>Learned how scalable software products are built.</li>
+
+</ul>
+
+</div>
+
+<div class="item">
+
+<div class="year">2022</div>
+
+<div class="role">Associate Product Manager</div>
+
+<div class="company">Apvin Labs</div>
+
+<div class="subtitle">Transition from Engineer to Product Builder</div>
+
+<ul>
+
+<li>Started building MVPs and product roadmaps.</li>
+
+<li>Worked closely with engineering and design teams.</li>
+
+<li>Turned customer pain points into product requirements.</li>
+
+</ul>
+
+</div>
+
+<div class="item">
+
+<div class="year">2022 – 2024</div>
+
+<div class="role">Associate Product Manager</div>
+
+<div class="company">Jobbatical</div>
+
+<div class="subtitle">Owning Product Decisions</div>
+
+<ul>
+
+<li>Automated immigration workflows.</li>
+
+<li>Built AI chatbot improvements.</li>
+
+<li>Launched Bank Wallet product.</li>
+
+<li>Conducted 120+ user interviews.</li>
+
+<li>Owned roadmap, prioritization and analytics.</li>
+
+</ul>
+
+</div>
+
+<div class="item">
+
+<div class="year">2025 – Present</div>
+
+<div class="role">Technical Product Manager</div>
+
+<div class="company">eComSuite</div>
+
+<div class="subtitle">Building AI Products from Zero to One</div>
+
+<ul>
+
+<li>Defined AI product strategy.</li>
+
+<li>Built MVP in 7 days.</li>
+
+<li>Improved engagement by 70%.</li>
+
+<li>Reduced delivery time by 60%.</li>
+
+<li>Established product execution frameworks.</li>
+
 </ul>
 
 </div>
 
 </div>
 
-<div class="section">
+</section>
 
-<div class="section-title">Education</div>
+<section class="section">
 
-<div class="education">
-<strong>Bachelor of Engineering (Computer Science)</strong>
-Nagarjuna College of Engineering and Technology
+<h2 class="title">Career Evolution</h2>
+
+<div class="evolution">
+
+<div class="step">Engineering</div>
+
+<div class="arrow">→</div>
+
+<div class="step">Building Features</div>
+
+<div class="arrow">→</div>
+
+<div class="step">Understanding Customers</div>
+
+<div class="arrow">→</div>
+
+<div class="step">Owning Products</div>
+
+<div class="arrow">→</div>
+
+<div class="step">AI Product Leadership</div>
+
 </div>
 
-<div class="education">
-<strong>AI Product Management</strong>
-HelloPM
+</section>
+
+<section class="section">
+
+<h2 class="title">Impact</h2>
+
+<div class="grid">
+
+<div class="impact">
+<h2>80%</h2>
+<p>Process Automation</p>
+</div>
+
+<div class="impact">
+<h2>70%</h2>
+<p>User Engagement Growth</p>
+</div>
+
+<div class="impact">
+<h2>60%</h2>
+<p>Faster Product Delivery</p>
+</div>
+
+<div class="impact">
+<h2>300+</h2>
+<p>Users Validated</p>
+</div>
+
+<div class="impact">
+<h2>50+</h2>
+<p>Enterprise Features Built</p>
+</div>
+
+<div class="impact">
+<h2>20%</h2>
+<p>Client Acquisition Growth</p>
 </div>
 
 </div>
 
+</section>
+
+<section class="section">
+
+<h2 class="title">Core Skills</h2>
+
+<div class="skills">
+
+<div class="skill">
+
+<h3>Product</h3>
+
+<ul>
+
+<li>Strategy</li>
+
+<li>Roadmapping</li>
+
+<li>MVP</li>
+
+<li>User Research</li>
+
+<li>Prioritization</li>
+
+</ul>
+
 </div>
+
+<div class="skill">
+
+<h3>Analytics</h3>
+
+<ul>
+
+<li>SQL</li>
+
+<li>BigQuery</li>
+
+<li>Mixpanel</li>
+
+<li>Google Analytics</li>
+
+<li>Power BI</li>
+
+</ul>
+
+</div>
+
+<div class="skill">
+
+<h3>AI</h3>
+
+<ul>
+
+<li>Cursor</li>
+
+<li>MCP</li>
+
+<li>RAG</li>
+
+<li>Lovable</li>
+
+<li>Antigravity</li>
+
+</ul>
+
+</div>
+
+<div class="skill">
+
+<h3>Design</h3>
+
+<ul>
+
+<li>Figma</li>
+
+<li>Wireframes</li>
+
+<li>Prototypes</li>
+
+<li>Product Specs</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2 class="title">Featured Projects</h2>
+
+<div class="projects">
+
+<div class="project">
+
+<h3>Expense Tracker</h3>
+
+<p>
+
+Personal finance application focused on helping users understand spending
+patterns through analytics dashboards and monthly tracking.
+
+</p>
+
+<span class="badge">300+ User Validation</span>
+<span class="badge">Analytics</span>
+<span class="badge">Antigravity</span>
+
+</div>
+
+<div class="project">
+
+<h3>GoTrekking</h3>
+
+<p>
+
+Built an MVP marketplace for trekking enthusiasts by researching competitors,
+designing user journeys, and rapidly prototyping booking experiences.
+
+</p>
+
+<span class="badge">MVP in 1 Week</span>
+<span class="badge">20+ Competitors</span>
+<span class="badge">Lovable</span>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+Building AI-powered products that transform customer problems into scalable solutions.
+
+</footer>
 
 </div>
 
